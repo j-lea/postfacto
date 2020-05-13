@@ -2,6 +2,10 @@ language: minimal
 
 dist: bionic
 
+cache:
+  directories:
+    - .bundler_cache
+
 addons:
   apt:
     sources:
