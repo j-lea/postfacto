@@ -20,12 +20,6 @@ redirect_url=$(curl --silent --show-error \
           --write-out "%{redirect_url}" \
           $asset_url)
 
-#curl --silent --show-error \
-#          --header "Accept: application/octet-stream" \
-#          --output $SCRIPT_DIR/package.zip \
-#          --request GET \
-#          $redirect_url
-
 curl -L -o "$SCRIPT_DIR/package.zip" $redirect_url
 
 echo ls: $(ls)

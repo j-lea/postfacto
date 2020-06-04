@@ -52,6 +52,29 @@ then
       && exit 1)
 fi
 
+############
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Get the asset url of the only draft
+asset_url=$(curl -u $GITHUB_USERNAME:$ACCESS_TOKEN \
+          --header "Accept: application/json" \
+          --request GET \
+          $REPO_API_URL \
+          | jq --raw-output '.[] | select(.draft==true).assets[0].url')
+
+# Get the redirect url
+redirect_url=$(curl --silent --show-error \
+          --header "Authorization: token $ACCESS_TOKEN" \
+          --header "Accept: application/octet-stream" \
+          --request GET \
+          --write-out "%{redirect_url}" \
+          $asset_url)
+
+curl -L -o "$SCRIPT_DIR/package.zip" $redirect_url
+
+########
+
 curl -L -o "$SCRIPT_DIR/last-release.zip" 'https://github.com/pivotal/postfacto/releases/latest/download/package.zip'
 unzip "$SCRIPT_DIR/package.zip"
 unzip "$SCRIPT_DIR/last-release.zip" -d "$SCRIPT_DIR/last-release"
