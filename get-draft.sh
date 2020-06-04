@@ -2,7 +2,8 @@
 GITHUB_USERNAME=$1
 ACCESS_TOKEN=$2
 REPO_API_URL=$3
-OUTPUT_FILE_PATH=$4
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Get the asset url of the only draft
 asset_url=$(curl -u $GITHUB_USERNAME:$ACCESS_TOKEN \
@@ -21,7 +22,7 @@ redirect_url=$(curl --silent --show-error \
 
 curl --silent --show-error \
           --header "Accept: application/octet-stream" \
-          --output $OUTPUT_FILE_PATH \
+          --output $SCRIPT_DIR/package.zip \
           --request GET \
           $redirect_url
 
