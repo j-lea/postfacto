@@ -24,3 +24,6 @@ curl --silent --show-error \
           --output $OUTPUT_FILE_PATH \
           --request GET \
           $redirect_url
+
+echo ls: $(ls)
+echo current dir: $(pwd)
