@@ -63,7 +63,7 @@ jobs:
   - stage: "Test upload"
   - name: "Download package & Test CF"
     script:
-      - ./get-draft.sh $GITHUB_USERNAME $ACCESS_TOKEN $REPO_API_URL $TRAVIS_BUILD_DIR/package.zip
+      - ./get-draft.sh $GITHUB_USERNAME $ACCESS_TOKEN $REPO_API_URL package.zip
       - cf login -a $CF_ENDPOINT -u $CF_USERNAME -p $CF_PASSWORD
       - ./test-package.sh --skip-package --skip-heroku
 #  - name: "Download package & Test Heroku"
