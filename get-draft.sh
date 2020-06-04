@@ -1,7 +1,4 @@
-# Have am access token
-GITHUB_USERNAME=$1
-ACCESS_TOKEN=$2
-REPO_API_URL=$3
+#!/bin/sh
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -10,8 +7,7 @@ asset_url=$(curl -u $GITHUB_USERNAME:$ACCESS_TOKEN \
           --header "Accept: application/json" \
           --request GET \
           $REPO_API_URL \
-          | jq --raw-output '.[] | select(.draft==true).assets[0].url')
-echo $asset_url
+          | jq --raw-output 'sort_by(.created_at) | .[] | select(.draft==true).assets[0].url' | head -n 1)
 
 # Get the redirect url
 redirect_url=$(curl --silent --show-error \
@@ -20,15 +16,9 @@ redirect_url=$(curl --silent --show-error \
           --request GET \
           --write-out "%{redirect_url}" \
           $asset_url)
-echo $redirect_url
 
 curl --silent --show-error \
           --header "Accept: application/octet-stream" \
           --output $SCRIPT_DIR/package2.zip \
           --request GET \
           $redirect_url
-
-#curl -L -o "$SCRIPT_DIR/package.zip" $redirect_url
-
-echo ls: $(ls)
-echo current dir: $(pwd)
