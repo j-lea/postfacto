@@ -56,7 +56,7 @@ jobs:
         on:
           tags: true
         api_key:
-          secure: dPDprfJo3c5iCk5fcPR7tgRMz5OcCF6IAPRx1/WMAq1FJjgdkD6iu628/AAgezN/rlTDiqZpfx3nj3UhTSUOeBZgEaRbpvpIc3bLc2RABqqxQNuL2g+DNt3L7XYcq8PLHQBVIHmRKp8DK1XJCaG3LUEuYZD9gKaiftMwbvgsgfVOFasslyypgDTi/NdPm1tNsDdKvYVe9dkZpDpHClJsoIQLl/gtNvrJREFTF2w0T8oSdccsoQekAAC4kXWiL5lgXIKHDpQTo1K8oXrl/hUxuw0e1fGKA6R0kNZliA6cQYG3OOb0a9JhplzO3jGWvlZdmJluWgy0yUn+jRZZOXiQVJOZCd2Lht3JN8p6x9D91S43forMV7ZmrW3XPuEocGIwVdY7yVKEsHAiAK3Ih3VbMuUn1ITvKB8F4idyurWEL9cQwsszX9pFSOriAH5mhIQs7vwp6uvFJIoADGiS//wEqcAwzsFWHCDLBPYRTk9Zp17MSgUj8+PDBo29pbbWtx6+14w82LVQQdnyoReDiZR5G1ItxSx6xjWIeGlyo8yu4xmNq9nufPoj6ZkGDbAJtH2YeaGIEcltjXzIalmBdmoVp+6SKyr8EFnolgWd+ns8KkCvLqxp3fwuz4OD+B619Au1/8WUrHRdetChlvxzEHVx3wnwWnw0zbCBh/cq0mWUdzs=
+          secure: nsO30W4L2lK2HTqL9NyfLd9xkYgJ5MIWtCs9mh2/h7q0g06vzQnG7QUXTp9x57VCkMe6KVphdP4Yq+Ys9j3bQ3AKQ7tVmK4TT9WtLowLPNCwdIXi7HvifXA21hbnfB2Uv2Tp8DdCnmRniI0T4YCojLNu1PwtXXCYVWSxtVGP955yLldT9JVEVXu6SbMCYFqwJ85+m2tnsGs6ynwFt4iHiiGkDC3KfA8z0kDS8suHSXZrMvppJhSN93fPAJZfV5vj4M535m0cQZYdnN6yxIV8b97wq9kWwruINVrjaZhdE8rLC4Xr2BnBhrvhMjPZbs1mknEKtw396eySD/ggyy0xdtw/KApfMvzjc9whu5JdBtGvYW9wfZgZ2HFkawyO82ZC8lpuS3oisgL6LtqZmLxgJhc1waMqKVk3ILWuXVGezGK7usVgDspcBkOMQc5oZKdUeiamOFtoOqzmQ35/+7rlp3tVQz6MmS04HSp0QEnxJEO9d9ppS55jZ4WKSKwlS5MY3LqH2/B5tEyKw/hldXcWfQliMKHWBjp3t7NJ+E7Cy3Pym4YAIQhP/AeqCP++ctM2G9VhFfYbtzYRMiZQg7Yb/Yq1Q7elQJKpvzpifcSIfY59mEMiHy6Yj6YUfwQ69EM7aaJvaOF+XPsC2ef89+gSxyShR8RqXxKtH0/ocDrw0IU=
         file:
           - package.zip
           - $TRAVIS_BUILD_DIR/deployment/helm/postfacto-*.tgz
