@@ -11,6 +11,7 @@ asset_url=$(curl -u $GITHUB_USERNAME:$ACCESS_TOKEN \
           --request GET \
           $REPO_API_URL \
           | jq --raw-output '.[] | select(.draft==true).assets[0].url')
+echo $asset_url
 
 # Get the redirect url
 redirect_url=$(curl --silent --show-error \
@@ -19,8 +20,15 @@ redirect_url=$(curl --silent --show-error \
           --request GET \
           --write-out "%{redirect_url}" \
           $asset_url)
+echo $redirect_url
 
-curl -L -o "$SCRIPT_DIR/package.zip" $redirect_url
+curl --silent --show-error \
+          --header "Accept: application/octet-stream" \
+          --output $SCRIPT_DIR/package2.zip \
+          --request GET \
+          $redirect_url
+
+#curl -L -o "$SCRIPT_DIR/package.zip" $redirect_url
 
 echo ls: $(ls)
 echo current dir: $(pwd)
