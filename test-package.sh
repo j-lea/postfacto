@@ -87,12 +87,12 @@ then
     sleep 5
   done
 
-  pushd "$SCRIPT_DIR/last-release/package/cf"
+  pushd "$SCRIPT_DIR/last-release/package/pws" # TODO: change pws to cf
     echo 'Deploying old version to Cloud Foundry'
     ENABLE_ANALYTICS=false ./deploy.sh $OLD_APP
   popd
 
-  pushd "$SCRIPT_DIR/package/cf"
+  pushd "$SCRIPT_DIR/package/pws" # TODO: change pws to cf
     echo 'Upgrading old version on Cloud Foundry'
     ENABLE_ANALYTICS=false ./upgrade.sh $OLD_APP
   popd
@@ -105,7 +105,7 @@ then
     ./smoke-test.sh $OLD_APP_URL $OLD_APP_ADMIN_URL email@example.com password
   popd
 
-  pushd "$SCRIPT_DIR/last-release/package/cf"
+  pushd "$SCRIPT_DIR/last-release/package/pws" # TODO: change pws to cf
     echo 'Deploying new version to Cloud Foundry'
     ENABLE_ANALYTICS=false ./deploy.sh $NEW_APP
   popd
