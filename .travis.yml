@@ -23,7 +23,7 @@ jobs:
 #    name: "All Tests"
 #    script:
 #      - docker run -v $TRAVIS_BUILD_DIR/.npm_cache:/npm_cache -v $TRAVIS_BUILD_DIR/.bundler_cache:/bundler_cache -v "$TRAVIS_BUILD_DIR":/postfacto -e npm_config_cache=/npm_cache -e BUNDLE_PATH=/bundler_cache postfacto/dev:2.6.3-12.6.0 /bin/bash -c "cd /postfacto && npm config set user 0 && npm config set unsafe-perm true && ./deps.sh && EPHEMERAL_CONTAINER=true ./test.sh"
-#  - stage: "Package"
+  - stage: "Package"
 #  - name: "Build & Deploy Docker"
 #    script:
 #      - docker build $TRAVIS_BUILD_DIR -f $TRAVIS_BUILD_DIR/Dockerfile -t travis-build-image
@@ -42,23 +42,23 @@ jobs:
 #      skip_cleanup: true
 #      on:
 #        tags: true
-#  - name: "Build and upload the package.zip as a draft"
-#    script:
-#      - docker run -v $TRAVIS_BUILD_DIR/deployment/helm/:/helm  -w /helm --entrypoint /helm/build.sh alpine/helm:3.2.1 $TRAVIS_TAG
-#      - docker run -v $TRAVIS_BUILD_DIR/.npm_cache:/npm_cache -v $TRAVIS_BUILD_DIR/.bundler_cache:/bundler_cache -v "$TRAVIS_BUILD_DIR":/postfacto -e npm_config_cache=/npm_cache -e BUNDLE_PATH=/bundler_cache postfacto/dev:2.6.3-12.6.0 /bin/bash -c "cd /postfacto && npm config set user 0 && npm config set unsafe-perm true && ./deps.sh && ./package.sh $TRAVIS_TAG"
-#    deploy:
-#      - provider: releases
-#        draft: true
-#        skip_cleanup: true
-#        overwrite: true
-#        file_glob: true
-#        on:
-#          tags: true
-#        api_key:
-#          secure: nsO30W4L2lK2HTqL9NyfLd9xkYgJ5MIWtCs9mh2/h7q0g06vzQnG7QUXTp9x57VCkMe6KVphdP4Yq+Ys9j3bQ3AKQ7tVmK4TT9WtLowLPNCwdIXi7HvifXA21hbnfB2Uv2Tp8DdCnmRniI0T4YCojLNu1PwtXXCYVWSxtVGP955yLldT9JVEVXu6SbMCYFqwJ85+m2tnsGs6ynwFt4iHiiGkDC3KfA8z0kDS8suHSXZrMvppJhSN93fPAJZfV5vj4M535m0cQZYdnN6yxIV8b97wq9kWwruINVrjaZhdE8rLC4Xr2BnBhrvhMjPZbs1mknEKtw396eySD/ggyy0xdtw/KApfMvzjc9whu5JdBtGvYW9wfZgZ2HFkawyO82ZC8lpuS3oisgL6LtqZmLxgJhc1waMqKVk3ILWuXVGezGK7usVgDspcBkOMQc5oZKdUeiamOFtoOqzmQ35/+7rlp3tVQz6MmS04HSp0QEnxJEO9d9ppS55jZ4WKSKwlS5MY3LqH2/B5tEyKw/hldXcWfQliMKHWBjp3t7NJ+E7Cy3Pym4YAIQhP/AeqCP++ctM2G9VhFfYbtzYRMiZQg7Yb/Yq1Q7elQJKpvzpifcSIfY59mEMiHy6Yj6YUfwQ69EM7aaJvaOF+XPsC2ef89+gSxyShR8RqXxKtH0/ocDrw0IU=
-#        file:
-#          - package.zip
-#          - $TRAVIS_BUILD_DIR/deployment/helm/postfacto-*.tgz
+  - name: "Build and upload the package.zip as a draft"
+    script:
+      - docker run -v $TRAVIS_BUILD_DIR/deployment/helm/:/helm  -w /helm --entrypoint /helm/build.sh alpine/helm:3.2.1 $TRAVIS_TAG
+      - docker run -v $TRAVIS_BUILD_DIR/.npm_cache:/npm_cache -v $TRAVIS_BUILD_DIR/.bundler_cache:/bundler_cache -v "$TRAVIS_BUILD_DIR":/postfacto -e npm_config_cache=/npm_cache -e BUNDLE_PATH=/bundler_cache postfacto/dev:2.6.3-12.6.0 /bin/bash -c "cd /postfacto && npm config set user 0 && npm config set unsafe-perm true && ./deps.sh && ./package.sh $TRAVIS_TAG"
+    deploy:
+      - provider: releases
+        draft: true
+        skip_cleanup: true
+        overwrite: true
+        file_glob: true
+        on:
+          tags: true
+        api_key:
+          secure: nsO30W4L2lK2HTqL9NyfLd9xkYgJ5MIWtCs9mh2/h7q0g06vzQnG7QUXTp9x57VCkMe6KVphdP4Yq+Ys9j3bQ3AKQ7tVmK4TT9WtLowLPNCwdIXi7HvifXA21hbnfB2Uv2Tp8DdCnmRniI0T4YCojLNu1PwtXXCYVWSxtVGP955yLldT9JVEVXu6SbMCYFqwJ85+m2tnsGs6ynwFt4iHiiGkDC3KfA8z0kDS8suHSXZrMvppJhSN93fPAJZfV5vj4M535m0cQZYdnN6yxIV8b97wq9kWwruINVrjaZhdE8rLC4Xr2BnBhrvhMjPZbs1mknEKtw396eySD/ggyy0xdtw/KApfMvzjc9whu5JdBtGvYW9wfZgZ2HFkawyO82ZC8lpuS3oisgL6LtqZmLxgJhc1waMqKVk3ILWuXVGezGK7usVgDspcBkOMQc5oZKdUeiamOFtoOqzmQ35/+7rlp3tVQz6MmS04HSp0QEnxJEO9d9ppS55jZ4WKSKwlS5MY3LqH2/B5tEyKw/hldXcWfQliMKHWBjp3t7NJ+E7Cy3Pym4YAIQhP/AeqCP++ctM2G9VhFfYbtzYRMiZQg7Yb/Yq1Q7elQJKpvzpifcSIfY59mEMiHy6Yj6YUfwQ69EM7aaJvaOF+XPsC2ef89+gSxyShR8RqXxKtH0/ocDrw0IU=
+        file:
+          - package.zip
+          - $TRAVIS_BUILD_DIR/deployment/helm/postfacto-*.tgz
   - stage: "Test upload"
   - name: "Download package & Test CF"
     script:
