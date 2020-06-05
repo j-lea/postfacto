@@ -99,8 +99,8 @@ then
 
   pushd "$SCRIPT_DIR/package"
     # smoke test after upgrade
-    OLD_APP_URL="$OLD_APP.cfapps.io"
-    OLD_APP_ADMIN_URL="$OLD_APP.cfapps.io/admin"
+    OLD_APP_URL="https://$OLD_APP.cfapps.io"
+    OLD_APP_ADMIN_URL="https://$OLD_APP.cfapps.io/admin"
 
     ./smoke-test.sh $OLD_APP_URL $OLD_APP_ADMIN_URL email@example.com password
   popd
@@ -112,8 +112,8 @@ then
 
   pushd "$SCRIPT_DIR/package"
     # smoke test after upgrade
-    APP_URL="$APP.cfapps.io"
-    APP_ADMIN_URL="$APP.cfapps.io/admin"
+    APP_URL="https://$APP.cfapps.io"
+    APP_ADMIN_URL="https://$APP.cfapps.io/admin"
 
     ./smoke-test.sh $APP_URL $APP_ADMIN_URL email@example.com password
   popd
