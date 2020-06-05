@@ -65,9 +65,9 @@ jobs:
       - ./get-draft.sh
       - cf login -a $CF_ENDPOINT -u $CF_USERNAME -p $CF_PASSWORD
       - ./test-package.sh --skip-package --skip-heroku
-#  - name: "Download package & Test Heroku"
-#    script:
-#      - ./get-draft.sh
-#      - openssl aes-256-cbc -K $encrypted_5e88d222d606_key -iv $encrypted_5e88d222d606_iv -in .heroku-netrc.enc -out .heroku-netrc -d
-#      - cat .heroku-netrc >> $HOME/.netrc
-#      - ./test-package.sh --skip-package --skip-cf
+  - name: "Download package & Test Heroku"
+    script:
+      - ./get-draft.sh
+      - openssl aes-256-cbc -K $encrypted_5e88d222d606_key -iv $encrypted_5e88d222d606_iv -in .jenny-heroku-netrc.enc -out .heroku-netrc -d # todo remove jenny
+      - cat .heroku-netrc >> $HOME/.netrc
+      - ./test-package.sh --skip-package --skip-cf

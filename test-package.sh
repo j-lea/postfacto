@@ -112,8 +112,8 @@ then
 
   pushd "$SCRIPT_DIR/package"
     # smoke test after upgrade
-    APP_URL="https://$APP.cfapps.io"
-    APP_ADMIN_URL="https://$APP.cfapps.io/admin"
+    APP_URL="https://$NEW_APP.cfapps.io"
+    APP_ADMIN_URL="https://$NEW_APP.cfapps.io/admin"
 
     ./smoke-test.sh $APP_URL $APP_ADMIN_URL email@example.com password
   popd
@@ -150,9 +150,27 @@ then
   pushd "$SCRIPT_DIR/package/heroku"
     echo 'Upgrading old version on Heroku'
     ENABLE_ANALYTICS=false ./upgrade.sh $OLD_APP
+  popd
 
+   pushd "$SCRIPT_DIR/package"
+    # smoke test after upgrade
+    OLD_APP_URL=$(heroku info $OLD_APP -s | grep web_url | cut -d= -f2)
+    OLD_APP_ADMIN_URL="$OLD_APP_URL/admin"
+
+    ./smoke-test.sh $OLD_APP_URL $OLD_APP_ADMIN_URL email@example.com password
+  popd
+
+  pushd "$SCRIPT_DIR/package/heroku"
     echo 'Deploying new version to Heroku'
     ENABLE_ANALYTICS=false ./deploy.sh $NEW_APP
+  popd
+
+  pushd "$SCRIPT_DIR/package"
+    # smoke test after upgrade
+    APP_URL=$(heroku info $NEW_APP -s | grep web_url | cut -d= -f2)
+    APP_ADMIN_URL="$NEW_APP/admin"
+
+    ./smoke-test.sh $APP_URL $APP_ADMIN_URL email@example.com password
   popd
 
   echo 'Cleaning up Heroku'
