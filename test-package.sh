@@ -95,9 +95,27 @@ then
   pushd "$SCRIPT_DIR/package/cf"
     echo 'Upgrading old version on Cloud Foundry'
     ENABLE_ANALYTICS=false ./upgrade.sh $OLD_APP
+  popd
 
+  pushd "$SCRIPT_DIR/package"
+    # smoke test after upgrade
+    OLD_APP_URL="$OLD_APP.cfapps.io"
+    OLD_APP_ADMIN_URL="$OLD_APP.cfapps.io/admin"
+
+    ./smoke-test.sh $OLD_APP_URL $OLD_APP_ADMIN_URL email@example.com password
+  popd
+
+  pushd "$SCRIPT_DIR/last-release/package/cf"
     echo 'Deploying new version to Cloud Foundry'
     ENABLE_ANALYTICS=false ./deploy.sh $NEW_APP
+  popd
+
+  pushd "$SCRIPT_DIR/package"
+    # smoke test after upgrade
+    APP_URL="$APP.cfapps.io"
+    APP_ADMIN_URL="$APP.cfapps.io/admin"
+
+    ./smoke-test.sh $APP_URL $APP_ADMIN_URL email@example.com password
   popd
 
   echo 'Cleaning up Cloud Foundry'

@@ -27,6 +27,6 @@ docker run -it --rm \
   -e BASE_ADMIN_URL=$BASE_ADMIN_URL \
   -e ADMIN_EMAIL=$ADMIN_EMAIL \
   -e ADMIN_PASSWORD=$ADMIN_PASSWORD \
-  postfacto/smoke:$APP_VERSION
+  jennylea/smoke:$APP_VERSION # TODO: put back to postfacto/smoke
 
 echo "Smoke tests passed"
