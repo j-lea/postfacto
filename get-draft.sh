@@ -7,7 +7,7 @@ asset_url=$(curl -u $GITHUB_USERNAME:$ACCESS_TOKEN \
           --header "Accept: application/json" \
           --request GET \
           $REPO_API_URL \
-          | jq --raw-output 'sort_by(.created_at) | .[] | select(.draft==true).assets[0].url' | head -n 1)
+          | jq --raw-output '[.[] | select(.draft==true)][0].assets[0].url')
 
 # Get the redirect url
 redirect_url=$(curl --silent --show-error \
