@@ -53,7 +53,7 @@ then
 fi
 
 curl -L -o "$SCRIPT_DIR/last-release.zip" 'https://github.com/pivotal/postfacto/releases/latest/download/package.zip'
-unzip "$SCRIPT_DIR/package2.zip" -d "$SCRIPT_DIR/package"
+unzip "$SCRIPT_DIR/package.zip"
 unzip "$SCRIPT_DIR/last-release.zip" -d "$SCRIPT_DIR/last-release"
 echo 'Setup complete'
 

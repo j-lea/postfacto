@@ -19,6 +19,6 @@ redirect_url=$(curl --silent --show-error \
 
 curl --silent --show-error \
           --header "Accept: application/octet-stream" \
-          --output $SCRIPT_DIR/package2.zip \
+          --output $SCRIPT_DIR/package.zip \
           --request GET \
           $redirect_url
